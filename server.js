@@ -17,7 +17,7 @@ const cleAPI = process.env.MONGODB_URI||'';
 
 /* Connecting to the MongoDB database. */
 
-mongoose.connect("mongodb+srv://DevWeb13:bNJbhRtBqTTcPrVK@cluster0.qy0y4i9.mongodb.net/?retryWrites=true&w=majority", 
+mongoose.connect("mongodb://DevWeb13:bNJbhRtBqTTcPrVK@cluster0.qy0y4i9.mongodb.net/?retryWrites=true&w=majority", 
   {
     // @ts-ignore
     useNewUrlParser: true,

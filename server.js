@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+const PORT = process.env.PORT || 5000;
+
 
 
 
@@ -25,7 +27,6 @@ mongoose.connect(cleAPI,
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
-const port = 5000;
 
 
 /* Parsing the body of the request. */
@@ -73,4 +74,4 @@ app.delete('/projects', (req, res) => {
     .catch(error => res.status(400).json({ error }));
 })
 
-app.listen(port, () => console.log('Server started at http://localhost:' + port));
+app.listen(PORT, () => console.log('Server started at http://localhost:' + PORT));

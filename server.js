@@ -11,13 +11,11 @@ const PORT = process.env.PORT || 5000;
 const Projects = require('./models/Projects');
 
 
-// Replace process.env.MONGODB_URI with YOUR mongodb url !!!!!
-const cleAPI = process.env.MONGODB_URI||'';
 
 
 /* Connecting to the MongoDB database. */
 
-mongoose.connect(cleAPI, 
+mongoose.connect(process.env.MONGODB_URI || "", 
   {
     // @ts-ignore
     useNewUrlParser: true,

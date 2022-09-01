@@ -1,11 +1,14 @@
 require('dotenv').config();
 const express = require('express');
+const product = require('./api/product');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+const app = express();
+
 const PORT = process.env.PORT || 5000;
 
-
+app.use("/api/product", product);
 
 
 const Projects = require('./models/Projects');
@@ -24,7 +27,7 @@ mongoose.connect(process.env.MONGODB_URI || "",
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-const app = express();
+
 
 
 /* Parsing the body of the request. */

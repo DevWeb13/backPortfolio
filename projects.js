@@ -1,6 +1,7 @@
 const projects = [
   {
     name: 'Les petits plats',
+    logo: 'https://zupimages.net/up/22/40/5l10.png',
     description: 'Développez un algorithme de recherche en JavaScript',
     image: 'https://zupimages.net/up/22/35/cafy.png',
     link: 'https://giulianoloic-7-30062022-b5y53iykx-devweb13.vercel.app/',
@@ -11,6 +12,7 @@ const projects = [
   },
   {
     name: 'Wealth Health',
+    logo: 'https://zupimages.net/up/22/40/58eh.png',
     description: 'Faites passer une librairie jQuery vers React',
     image: 'https://zupimages.net/up/22/35/gqu2.png',
     link: 'https://giulianoloic-14-28052022.vercel.app/',
@@ -21,6 +23,7 @@ const projects = [
   },
   {
     name: 'SportSee',
+    logo: 'https://zupimages.net/up/22/40/gnjv.png',
     description: 'Développez un tableau de bord d\'analytics avec React',
     image: 'https://zupimages.net/up/22/35/3jsa.png',
     link: 'https://giuliano-loic-12-26022022-hnc6ozb63-devweb13.vercel.app/',
@@ -31,6 +34,7 @@ const projects = [
   },
   {
     name: "Kasa",
+    logo: 'https://zupimages.net/up/22/40/s4dt.png',
     description: "Développez une application Web avec React et React Router",
     image: "https://zupimages.net/up/22/34/5aib.png",
     link: "https://giuliano-loic-11-07022022.vercel.app/",
@@ -41,6 +45,7 @@ const projects = [
   },
   {
     name: "FishEye",
+    logo: 'https://zupimages.net/up/22/40/e49h.png',
     description: "Créez un site accessible pour une plateforme de photographes",
     image: "https://zupimages.net/up/22/34/ux6c.png",
     link: "https://devweb13.github.io/GiulianoLoic_6_05112021/www/",
@@ -51,6 +56,7 @@ const projects = [
   },
   {
     name: 'Ohmyfood!',
+    logo: 'https://zupimages.net/up/22/40/hm0j.png',
     description: 'Dynamisez une page web avec des animations CSS',
     image: 'https://zupimages.net/up/22/35/oba3.png',
     link: 'https://devweb13.github.io/GiulianoLoic_3_26082021/',
@@ -61,6 +67,7 @@ const projects = [
   },
   {
     name: "Reservia",
+    logo: 'https://zupimages.net/up/22/40/noz6.png',
     description: "Transformez une maquette en site web",
     image: "https://zupimages.net/up/22/35/1xvl.png",
     link: "https://devweb13.github.io/GiulianoLoic_2_11082021/",

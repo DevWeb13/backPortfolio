@@ -8,13 +8,14 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const Projects = require('./models/Projects');
+const Comments = require('./models/Comments');
 
 
 
 
 /* Connecting to the MongoDB database. */
 
-mongoose.connect(process.env.MONGODB_URI || "", 
+mongoose.connect(process.env.MONGODB_URI || "",
   {
     // @ts-ignore
     useNewUrlParser: true,
@@ -70,6 +71,12 @@ app.delete('/projects', (req, res) => {
     .then(() => res.status(200).json({ message: 'project deleted successfully' }))
     .catch(error => res.status(400).json({ error }));
 })
+
+app.get('/comments', (_req, res) => {
+  Comments.find()
+    .then(comments => res.status(200).json(comments))
+    .catch(error => res.status(400).json({ error }));
+});
 
 app.listen(PORT, () => console.log('Server started at http://localhost:' + PORT));
 

@@ -45,15 +45,13 @@ app.get('/', (req, res) => {
 })
 
 
-
+/* projects */
 /* This is a route that will return all the projects in the database. */
 app.get('/projects', (_req, res) => {
   Projects.find()
     .then(projects => res.status(200).json(projects))
     .catch(error => res.status(400).json({ error }));
 });
-
-
 
 /* Creating a new project in the database. */
 app.post('/projects', (req, res) => {
@@ -72,9 +70,19 @@ app.delete('/projects', (req, res) => {
     .catch(error => res.status(400).json({ error }));
 })
 
+/* comments */
 app.get('/comments', (_req, res) => {
   Comments.find()
     .then(comments => res.status(200).json(comments))
+    .catch(error => res.status(400).json({ error }));
+});
+
+app.post('/comments', (req, res) => {
+  const comment = new Comments({
+    ...req.body
+  });
+  comment.save()
+    .then(() => res.status(201).json({ message: 'project added successfully' }))
     .catch(error => res.status(400).json({ error }));
 });
 

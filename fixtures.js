@@ -2,13 +2,21 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 
 const Projects = require('./models/Projects');
-const data = require('./projects.js');
+const projectsData = require('./projects.js');
 
+const Comments = require('./models/Comments');
+const commentsData = require('./comments.js');
 
 // Replace process.env.MONGODB_URI with YOUR mongodb url !!!!!
 const cleAPI = process.env.MONGODB_URI || '';
 
-async function start() {
+/**
+ * It connects to the MongoDB database, then it loops through the data and adds each element to the database
+ * @param {Object} Model - the model you want to use to create the new elements.
+ * @param {Array} data - the data to be inserted into the database.
+ * @returns {Promise} - a promise that resolves when the data is inserted.
+ */
+async function start(Model, data) {
   /* Connecting to the MongoDB database. */
   try {
     await mongoose.connect(cleAPI,
@@ -20,9 +28,9 @@ async function start() {
     console.log('Connexion à MongoDB réussie !');
     for (const fixture in data) {
       console.log(fixture);
-      const project = new Projects(data[fixture]);
-      await project.save();
-      console.log('Project added successfully')
+      const newElm = new Model(data[fixture]);
+      await newElm.save();
+      console.log('New element added successfully')
     }
   }
   catch (error) {
@@ -30,4 +38,5 @@ async function start() {
   }
 }
 
-start();
+//start(Projects, projectsData);
+start(Comments, commentsData);

@@ -10,7 +10,7 @@ const projects = [
     date: "2022-07",
     categorie: "OpenClassrooms",
   },
-  {
+  /*{
     name: 'Wealth Health',
     logo: 'https://zupimages.net/up/22/40/58eh.png',
     description: 'Faites passer une librairie jQuery vers React',
@@ -76,7 +76,7 @@ const projects = [
     date: "2021-08",
     categorie: "OpenClassrooms",
 
-  },
+  },*/
 ]
 
 module.exports = projects;

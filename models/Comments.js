@@ -7,6 +7,7 @@ const commentSchema = new mongoose.Schema({
   message: { type: String, required: true },
   email: { type: String, required: true },
   date: { type: String, required: true },
+  ip: { type: Object, required: true },
 });
 
 module.exports = mongoose.model('Comment', commentSchema);

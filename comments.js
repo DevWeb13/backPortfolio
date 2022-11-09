@@ -5,7 +5,7 @@ const comments = [
     email: 'giuliano.loic@sfr.fr',
     message: 'Bonjour, n\'hésitez pas à me contacter pour plus d\'informations.',
     date: '2021-08-11T22:00:00.000Z',
-    tel: '06 12 34 56 78',
+    tel: '',
     ip: { "ip": "185.228.229.137" },
   },
 ]

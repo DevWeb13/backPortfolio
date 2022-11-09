@@ -8,7 +8,7 @@ const commentSchema = new mongoose.Schema({
   email: { type: String, required: true },
   date: { type: String, required: true },
   ip: { type: Object, required: true },
-  tel: { type: String, required: true },
+  tel: { type: String },
 });
 
 module.exports = mongoose.model('Comment', commentSchema);

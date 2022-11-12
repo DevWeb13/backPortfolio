@@ -2,19 +2,19 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const nodemailer = require("nodemailer");
 
 const app = express();
 
 const PORT = process.env.PORT || 5000;
+const EMAIL = process.env.EMAIL;
+const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
 
 const Projects = require('./models/Projects');
 const Comments = require('./models/Comments');
-
-
-
+const Emails = require('./models/Emails');
 
 /* Connecting to the MongoDB database. */
-
 mongoose.connect(process.env.MONGODB_URI || "",
   {
     // @ts-ignore
@@ -24,13 +24,9 @@ mongoose.connect(process.env.MONGODB_URI || "",
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-
-
-
 /* Parsing the body of the request. */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 /* Allowing the frontend to access the backend. */
 app.use(cors({
@@ -43,7 +39,6 @@ app.use(cors({
 app.get('/', (req, res) => {
   res.send("Hello World !!");
 })
-
 
 /* projects */
 /* This is a route that will return all the projects in the database. */
@@ -84,6 +79,45 @@ app.post('/comments', (req, res) => {
   comment.save()
     .then(() => res.status(201).json({ message: 'project added successfully' }))
     .catch(error => res.status(400).json({ error }));
+});
+
+/* email */
+const contactEmail = nodemailer.createTransport({
+  host: "smtp.sfr.fr",
+  port: 465,
+  secure: true,
+  auth: {
+    user: EMAIL,
+    pass: EMAIL_PASSWORD
+  }
+});
+
+app.post('/emails', (req, res) => {
+  const email = new Emails({
+    ...req.body
+  });
+  const mailOptions = {
+    from: EMAIL,
+    to: EMAIL,
+    subject: `Message de ${email.prenom} ${email.nom}`,
+    text: `Message de ${email.prenom} ${email.nom} (${email.email})\n\n${email.message}\n\nTéléphone: ${email.tel}\n\nIP: ${email.ip.ip}`
+  };
+  contactEmail.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.send('error');
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+});
+
+contactEmail.verify((error) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Ready to Send");
+  }
 });
 
 app.listen(PORT, () => console.log('Server started at http://localhost:' + PORT));

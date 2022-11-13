@@ -92,6 +92,12 @@ const contactEmail = nodemailer.createTransport({
   }
 });
 
+app.get('/emails', (_req, res) => {
+  Emails.find()
+    .then(emails => res.status(200).json(emails))
+    .catch(error => res.status(400).json({ error }));
+});
+
 app.post('/emails', (req, res) => {
   const email = new Emails({
     ...req.body

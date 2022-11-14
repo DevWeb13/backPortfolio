@@ -102,6 +102,9 @@ app.post('/emails', (req, res) => {
   const email = new Emails({
     ...req.body
   });
+  email.save()
+    .then(() => res.status(201).json({ message: 'email added successfully' }))
+    .catch(error => res.status(400).json({ error }));
   const mailOptions = {
     from: EMAIL,
     to: EMAIL,

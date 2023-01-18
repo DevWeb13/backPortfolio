@@ -3,6 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const nodemailer = require("nodemailer");
+// @ts-ignore
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -15,6 +18,7 @@ const Comments = require('./models/Comments');
 const Emails = require('./models/Emails');
 
 /* Connecting to the MongoDB database. */
+mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGODB_URI || "",
   {
     // @ts-ignore
@@ -28,6 +32,8 @@ mongoose.connect(process.env.MONGODB_URI || "",
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+
 /* Allowing the frontend to access the backend. */
 app.use(cors({
   origin: '*'
@@ -35,6 +41,37 @@ app.use(cors({
 app.use(cors({
   methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
 }));
+
+
+/* Stripe */
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.post('/stripe/charge', cors(), async (req, res) => {
+  let { amount, id } = req.body;
+  console.log(amount, id);
+  try {
+    const payment = await stripe.paymentIntents.create({
+      amount,
+      currency: "EUR",
+      description: "Paiement de la commande",
+      payment_method: id,
+      confirm: true
+    });
+    console.log("Payment", payment);
+    res.json({
+      message: "Payment Successful",
+      success: true
+    });
+  }
+  catch (error) {
+    console.log("Error", error);
+    res.json({
+      message: "Payment Failed",
+      success: false
+    });
+  }
+});
 
 app.get('/', (req, res) => {
   res.send("Hello World !!");
@@ -129,3 +166,4 @@ contactEmail.verify((error) => {
 app.listen(PORT, () => console.log('Server started at http://localhost:' + PORT));
 
 module.exports = app;
+

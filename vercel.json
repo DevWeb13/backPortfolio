@@ -9,19 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/",
-      "headers": {
-        "key": "Cache-Control",
-        "value": "s-maxage=1, stale-while-revalidate=59"
-      },
-      "continue": true
-    },
-    {
-      "src": "/assets/(.*)",
-      "headers": {
-        "Cache-Control": "public, max-age=31556952, immutable"
-      },
-      "continue": true
+      "dest": "/"
     }
   ]
 }

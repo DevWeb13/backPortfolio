@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const nodemailer = require("nodemailer");
 
 const app = express();
+app.disable("x-powered-by");
 
 const PORT = process.env.PORT || 5000;
 const EMAIL = process.env.EMAIL;

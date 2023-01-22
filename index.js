@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 
 /* Allowing the frontend to access the backend. */
 app.use(cors({
-  origin: 'https://www.lareponsedev.com/*',
+  origin: 'https://www.lareponsedev.com',
   methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
 }));
 

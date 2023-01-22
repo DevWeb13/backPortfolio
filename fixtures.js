@@ -5,7 +5,7 @@ const Projects = require('./models/Projects');
 const projectsData = require('./projects.js');
 
 const Comments = require('./models/Comments');
-const commentsData = require('./comments.js');
+// const commentsData = require('./comments.js');
 
 // Replace process.env.MONGODB_URI with YOUR mongodb url !!!!!
 const cleAPI = process.env.MONGODB_URI || '';
@@ -39,4 +39,4 @@ async function start(Model, data) {
 }
 
 //start(Projects, projectsData);
-start(Comments, commentsData);
+//start(Comments, commentsData);

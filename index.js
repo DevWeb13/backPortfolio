@@ -35,6 +35,14 @@ app.use(cors({
   methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
 }));
 
+app.use(express.static("public", {
+  setHeaders: function (res, path) {
+    if (path.endsWith(".svg")) {
+      res.setHeader("Cache-Control", "public, max-age=31536000");
+    }
+  }
+}));
+
 
 app.get('/', (req, res) => {
   res.send("Hello World !!");

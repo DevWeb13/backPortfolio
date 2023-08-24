@@ -7,6 +7,9 @@ const projectsData = require('./projects.js');
 const Comments = require('./models/Comments');
 // const commentsData = require('./comments.js');
 
+const ProjectsLRD = require('./models/ProjectLRD');
+const projectsLRDData = require('./projectsLRDFixtures.js');
+
 // Replace process.env.MONGODB_URI with YOUR mongodb url !!!!!
 const cleAPI = process.env.MONGODB_URI || '';
 
@@ -19,24 +22,23 @@ const cleAPI = process.env.MONGODB_URI || '';
 async function start(Model, data) {
   /* Connecting to the MongoDB database. */
   try {
-    await mongoose.connect(cleAPI,
-      {
-        // @ts-ignore
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      });
+    await mongoose.connect(cleAPI, {
+      // @ts-ignore
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log('Connexion à MongoDB réussie !');
     for (const fixture in data) {
       console.log(fixture);
       const newElm = new Model(data[fixture]);
       await newElm.save();
-      console.log('New element added successfully')
+      console.log('New element added successfully');
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
 }
 
 //start(Projects, projectsData);
 //start(Comments, commentsData);
+start(ProjectsLRD, projectsLRDData);
